@@ -6,14 +6,21 @@ const path = require('path');
 const iotHubClient = require('./IoTHub/iot-hub.js');
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'public')));
+//__dirname : server.js가 실행되는 현재 경로
+// path의 join 함수를 써서 현재 위치와 public 폴더 위치를 합쳐 경로 설정
+app.use(express.static(path.join(__dirname, 'public'))); 
 app.use(function (req, res/*, next*/) {
   res.redirect('/');
 });
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
-console.log(wss);
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+});
 
 // Broadcast to all.
 wss.broadcast = function broadcast(data) {
