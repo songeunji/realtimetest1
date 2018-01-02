@@ -68,9 +68,16 @@ $(document).ready(function () {
 
   var ws = new WebSocket('wss://' + location.host);
   console.log(ws);
-  ws.onopen = function () {
-    console.log('Successfully connect WebSocket');
+  ws.onopen = function (message) {
+    console.log(message);
   }
+  ws.onclose = function (message) {
+    console.log(message);
+  }
+  ws.onerror = function (message) {
+    console.log(message);
+  }
+
   ws.onmessage = function (message) {
     console.log('receive message' + message.data);
     try {
