@@ -16,7 +16,8 @@ app.use(function (req, res/*, next*/) {
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(message) {
+    console.log(ws);
+    ws.on('message', function incoming(message) {
     console.log('received: %s', message);
   });
 
