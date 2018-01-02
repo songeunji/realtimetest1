@@ -13,7 +13,7 @@ app.use(function (req, res/*, next*/) {
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
-console.log(process.env[wss]);
+console.log(wss);
 
 // Broadcast to all.
 wss.broadcast = function broadcast(data) {
