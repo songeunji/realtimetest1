@@ -51,7 +51,7 @@ iotHubReader.startReadMessage(function (obj, date) {
   }
 });
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '8080');
 server.listen(port, function listening() {
   console.log('Listening on %d', server.address().port);
 });
