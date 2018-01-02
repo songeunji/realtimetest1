@@ -29,6 +29,8 @@ wss.broadcast = function broadcast(data) {
 };
 
 var iotHubReader = new iotHubClient(process.env['Azure.IoT.IoTHub.ConnectionString'], process.env['Azure.IoT.IoTHub.ConsumerGroup']);
+console.log(process.env['Azure.IoT.IoTHub.ConnectionString']);
+
 iotHubReader.startReadMessage(function (obj, date) {
   try {
     console.log(date);
