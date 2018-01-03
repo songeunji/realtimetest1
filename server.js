@@ -37,7 +37,7 @@ wss.broadcast = function broadcast(data) {
   });
 };
 
-var iotHubReader = new iotHubClient('HostName=SpmsMQTest.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=4VDeYeXXS4IJ542lWvFL4l6Pcb7nKZnFHGxKnUNGqFc=', 'webfrontend');
+var iotHubReader = new iotHubClient(process.env['Azure.IoT.IoTHub.ConnectionString'], process.env['Azure.IoT.IoTHub.ConsumerGroup']);
 
 iotHubReader.startReadMessage(function (obj, date) {
   try {

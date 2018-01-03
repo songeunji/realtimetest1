@@ -16,7 +16,6 @@ IoTHubReaderClient.prototype.startReadMessage = function(cb) {
   };
 
   var deviceId = process.env['Azure.IoT.IoTHub.DeviceId'];
-  deviceId = 'testID';
 
   this.iotHubClient.open()
     .then(this.iotHubClient.getPartitionIds.bind(this.iotHubClient))

@@ -70,7 +70,6 @@ $(document).ready(function () {
   console.log(ws);
   ws.onopen = function (message) {
     console.log(message);
-    ws.send('something');
   }
   ws.onclose = function (message) {
     console.log(message);
