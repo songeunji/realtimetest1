@@ -67,18 +67,12 @@ $(document).ready(function () {
   });
 
   var ws = new WebSocket('wss://' + location.host);
-  console.log(ws);
-  ws.onopen = function (message) {
-    console.log(message);
-  }
-  ws.onclose = function (message) {
-    console.log(message);
-  }
-  ws.onerror = function (message) {
-    console.log(message);
-  }
 
-  ws.onmessage = function (message) {
+  
+  var wsOpen = function (message) {
+    console.log(message);
+  };
+  var wsRcvMsg = function (message) {
     console.log('receive message' + message.data);
     try {
       // var obj = JSON.parse(message.data);
@@ -106,5 +100,20 @@ $(document).ready(function () {
     } catch (err) {
       console.error(err);
     }
-  }
+  };
+
+  
+  ws.onopen = wsOpen;
+  ws.onclose = function (message) {
+    console.log(message);
+    ws = new WebSocket('wss://' + location.host);
+    ws.onopen = wsOpen;
+    ws.onmessage = wsRcvMsg;
+  };
+  ws.onerror = function (message) {
+    console.log(message);
+  };
+
+  ws.onmessage = wsRcvMsg;
+  
 });
