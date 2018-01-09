@@ -73,7 +73,7 @@ $(document).ready(function () {
     console.log(message);
   };
   var wsRcvMsg = function (message) {
-    console.log(message);
+    console.log(message.data);
     try {
       // var obj = JSON.parse(message.data);
       // if(!obj.time || !obj.temperature) {
