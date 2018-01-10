@@ -52,7 +52,7 @@ $(document).ready(function () {
             labelString: 'Speed LG',
             display: true
           },
-          position: 'right'
+          position: 'left'
         }]
     }
   }
