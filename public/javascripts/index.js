@@ -91,7 +91,7 @@ $(document).ready(function () {
       });
 
       var idx = strFilter[0].indexOf(":");
-      strFilter[0] = strFilter[0].substring(idx+1, strFilter[0].length-1);
+      strFilter[0] = strFilter[0].substring(idx+1, strFilter[0].length);
       strFilter[1] = parseFloat(strFilter[1].split(":")[1]);
       strFilter[2] = parseFloat(strFilter[2].split(":")[1]);
 
