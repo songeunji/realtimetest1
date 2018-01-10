@@ -8,7 +8,6 @@ $(document).ready(function () {
       {
         fill: false,
         label: 'Speed VG',
-        yAxisID: 'Speed_VG',
         borderColor: "rgba(255, 204, 0, 1)",
         pointBoarderColor: "rgba(255, 204, 0, 1)",
         backgroundColor: "rgba(255, 204, 0, 0.4)",
@@ -19,7 +18,6 @@ $(document).ready(function () {
       {
         fill: false,
         label: 'Speed LG',
-        yAxisID: 'Speed_LG',
         borderColor: "rgba(24, 120, 240, 1)",
         pointBoarderColor: "rgba(24, 120, 240, 1)",
         backgroundColor: "rgba(24, 120, 240, 0.4)",
@@ -35,27 +33,8 @@ $(document).ready(function () {
       display: true,
       text: 'Speed VG & Speed LG Real-time Data',
       fontSize: 36
-    },
-    scales: {
-      yAxes: [{
-        id: 'Speed_VG',
-        type: 'linear',
-        scaleLabel: {
-          labelString: 'Speed VG',
-          display: true
-        },
-        position: 'left',
-      }, {
-          id: 'Speed_LG',
-          type: 'linear',
-          scaleLabel: {
-            labelString: 'Speed LG',
-            display: true
-          },
-          position: 'left'
-        }]
     }
-  }
+  };
 
   //Get the context of the canvas element we want to select
   var ctx = document.getElementById("myChart").getContext("2d");
