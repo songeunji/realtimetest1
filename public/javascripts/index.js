@@ -104,7 +104,7 @@ $(document).ready(function () {
         timeData.shift();
         speedVGData.shift();
       }
-      if (obj.humidity) {
+      if (strFilter[2]) {
         speedLGData.push(strFilter[2]);
       }
       if (speedLGData.length > maxLen) {
