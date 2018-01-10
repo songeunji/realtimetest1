@@ -33,7 +33,7 @@ $(document).ready(function () {
   var basicOption = {
     title: {
       display: true,
-      text: 'Speed VG & Humidity Real-time Data',
+      text: 'Speed VG & Speed LG Real-time Data',
       fontSize: 36
     },
     scales: {
