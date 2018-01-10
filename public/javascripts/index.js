@@ -110,7 +110,7 @@ $(document).ready(function () {
       if (speedLGData.length > maxLen) {
         speedLGData.shift();
       }
-
+      console.log(strFilter[0], strFilter[1], strFilter[2]);
       myLineChart.update();
 
       // var obj = JSON.parse(message.data);
