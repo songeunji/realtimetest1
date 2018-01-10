@@ -1,31 +1,31 @@
 $(document).ready(function () {
   var timeData = [],
-    temperatureData = [],
-    humidityData = [];
+    speedVGData = [],
+    speedLGData = [];
   var data = {
     labels: timeData,
     datasets: [
       {
         fill: false,
-        label: 'Temperature',
-        yAxisID: 'Temperature',
+        label: 'Speed VG',
+        yAxisID: 'Speed_VG',
         borderColor: "rgba(255, 204, 0, 1)",
         pointBoarderColor: "rgba(255, 204, 0, 1)",
         backgroundColor: "rgba(255, 204, 0, 0.4)",
         pointHoverBackgroundColor: "rgba(255, 204, 0, 1)",
         pointHoverBorderColor: "rgba(255, 204, 0, 1)",
-        data: temperatureData
+        data: speedVGData
       },
       {
         fill: false,
-        label: 'Humidity',
-        yAxisID: 'Humidity',
+        label: 'Speed LG',
+        yAxisID: 'Speed_LG',
         borderColor: "rgba(24, 120, 240, 1)",
         pointBoarderColor: "rgba(24, 120, 240, 1)",
         backgroundColor: "rgba(24, 120, 240, 0.4)",
         pointHoverBackgroundColor: "rgba(24, 120, 240, 1)",
         pointHoverBorderColor: "rgba(24, 120, 240, 1)",
-        data: humidityData
+        data: speedLGData
       }
     ]
   }
@@ -33,23 +33,23 @@ $(document).ready(function () {
   var basicOption = {
     title: {
       display: true,
-      text: 'Temperature & Humidity Real-time Data',
+      text: 'Speed VG & Humidity Real-time Data',
       fontSize: 36
     },
     scales: {
       yAxes: [{
-        id: 'Temperature',
+        id: 'Speed_VG',
         type: 'linear',
         scaleLabel: {
-          labelString: 'Temperature(C)',
+          labelString: 'Speed VG',
           display: true
         },
         position: 'left',
       }, {
-          id: 'Humidity',
+          id: 'Speed_LG',
           type: 'linear',
           scaleLabel: {
-            labelString: 'Humidity(%)',
+            labelString: 'Speed LG',
             display: true
           },
           position: 'right'
@@ -75,25 +75,63 @@ $(document).ready(function () {
   var wsRcvMsg = function (message) {
     console.log(message.data);
     try {
+
+      var strSplit = message.data.split(",");
+      var strFilter = [];
+
+      strSplit.forEach(function () {
+        var str = val.indexOf("TIME_STAMP");
+        if(str != -1) strFilter.push(val);
+        
+        str = val.indexOf("SPEED_VG");
+        if(str != -1) strFilter.push(val);
+        
+        str = val.indexOf("SPEED_LG");
+        if(str != -1) strFilter.push(val);
+      });
+
+      var idx = strFilter[0].indexOf(":");
+      strFilter[0] = strFilter[0].substring(idx+1, strFilter[0].length-1);
+      strFilter[1] = parseFloat(strFilter[1].split(":")[1]);
+      strFilter[2] = parseFloat(strFilter[2].split(":")[1]);
+
+      timeData.push(strFilter[0]);
+      speedVGData.push(strFilter[1]);
+
+      const maxLen = 50;
+      var len = timeData.length;
+      if (len > maxLen) {
+        timeData.shift();
+        speedVGData.shift();
+      }
+      if (obj.humidity) {
+        speedLGData.push(strFilter[2]);
+      }
+      if (speedLGData.length > maxLen) {
+        speedLGData.shift();
+      }
+
+      myLineChart.update();
+
       // var obj = JSON.parse(message.data);
       // if(!obj.time || !obj.temperature) {
       //   return;
       // }
       // timeData.push(obj.time);
-      // temperatureData.push(obj.temperature);
+      // speedVGData.push(obj.temperature);
       // // only keep no more than 50 points in the line chart
       // const maxLen = 50;
       // var len = timeData.length;
       // if (len > maxLen) {
       //   timeData.shift();
-      //   temperatureData.shift();
+      //   speedVGData.shift();
       // }
 
       // if (obj.humidity) {
-      //   humidityData.push(obj.humidity);
+      //   speedLGData.push(obj.humidity);
       // }
-      // if (humidityData.length > maxLen) {
-      //   humidityData.shift();
+      // if (speedLGData.length > maxLen) {
+      //   speedLGData.shift();
       // }
 
       // myLineChart.update();
