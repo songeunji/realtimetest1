@@ -79,7 +79,7 @@ $(document).ready(function () {
       var strSplit = message.data.split(",");
       var strFilter = [];
 
-      strSplit.forEach(function () {
+      strSplit.forEach(function (val) {
         var str = val.indexOf("TIME_STAMP");
         if(str != -1) strFilter.push(val);
         
